@@ -1,0 +1,22 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20vh;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.main button {
+  padding: 5px 10px;
+  margin: 10px;
+  font-weight: bold;
+  font-size: 24px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+.main h1 {
+  font-size: 72px;
+}
