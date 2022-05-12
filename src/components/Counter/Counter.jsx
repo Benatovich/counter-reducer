@@ -9,34 +9,34 @@ const colors = {
 };
 
 export default function Counter() {
-  // const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
   const [currentColor, setCurrentColor] = useState(colors.yellow);
 
-  useEffect(() => {
-    if (state.count === 0) {
-      setCurrentColor(colors.yellow);
-    }
+  // useEffect(() => {
+  //   if (state.count === 0) {
+  //     setCurrentColor(colors.yellow);
+  //   }
 
-    if (state.count > 0) {
-      setCurrentColor(colors.green);
-    }
+  //   if (state.count > 0) {
+  //     setCurrentColor(colors.green);
+  //   }
 
-    if (state.count < 0) {
-      setCurrentColor(colors.red);
-    }
-  }, [state]);
+  //   if (state.count < 0) {
+  //     setCurrentColor(colors.red);
+  //   }
+  // }, [state]);
 
-  const increment = () => {
-    setCount((prevState) => prevState + 1);
-  };
+  // const increment = () => {
+  //   setCount((prevState) => prevState + 1);
+  // };
 
-  const decrement = () => {
-    setCount((prevState) => prevState - 1);
-  };
+  // const decrement = () => {
+  //   setCount((prevState) => prevState - 1);
+  // };
 
-  const reset = () => {
-    setCount(0);
-  };
+  // const reset = () => {
+  //   setCount(0);
+  // };
 
   return (
     <main className={styles.main}>

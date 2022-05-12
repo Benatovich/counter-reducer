@@ -1,4 +1,6 @@
-import { createContext, useContext, useReducer, useState } from 'react'
+import { createContext, useContext,
+useReducer, useState, useEffect
+} from 'react'
 
 const colors = {
     yellow: 'rgb(236, 222, 153)',
@@ -27,9 +29,24 @@ const StateContext = createContext();
 
 export const CounterProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    // const [count, setCount] = useState(0);
-    // const [currentColor, setCurrentColor] = useState(colors.yellow);
+    const [count, setCount] = useState(0);
+    const [currentColor, setCurrentColor] = useState(colors.yellow);
   
+    useEffect(() => {
+        if (state.count === 0) {
+          setCurrentColor(colors.yellow);
+        }
+    
+        if (state.count > 0) {
+          setCurrentColor(colors.green);
+        }
+    
+        if (state.count < 0) {
+          setCurrentColor(colors.red);
+        }
+      }, [state]);
+    
+    
 
     const handleIncrement = () => {
         dispatch({ type: 'INCREMENT' });
