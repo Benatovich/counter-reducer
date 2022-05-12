@@ -10,6 +10,20 @@ const colors = {
 
 const initialState = { color: colors.yellow, count: 0 };
 
+const reducer = (state, action) => {
+  switch (action.type) {
+      case 'INCREMENT':
+          return { ...state, count: state.count + 1};
+      case 'DECREMENT':
+          return { ...state, count: state.count - 1};
+      case 'RESET':
+          return initialState;
+      // case 'COLOR_ZERO':
+      //     return { ...state, color: colors.yellow };        
+      default:
+          throw new Error(`Action type ${action.type} is not supported`);
+  }
+};
 
 export default function Counter() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -32,32 +46,29 @@ export default function Counter() {
     }
   }, [state]);
 
-  const increment = () => {
-    setCount((prevState) => prevState + 1);
-  };
+  // const increment = () => {
+  //   setCount((prevState) => prevState + 1);
+  // };
 
-  const decrement = () => {
-    setCount((prevState) => prevState - 1);
-  };
+  // const decrement = () => {
+  //   setCount((prevState) => prevState - 1);
+  // };
 
-  const reset = () => {
-    setCount(0);
-  };
+  // const reset = () => {
+  //   setCount(0);
+  // };
 
-  const reducer = (state, action) => {
-    switch (action.type) {
-        case 'INCREMENT':
-            return { ...state, count: state.count + 1};
-        case 'DECREMENT':
-            return { ...state, count: state.count - 1};
-        case 'RESET':
-            return initialState;
-        // case 'COLOR_ZERO':
-        //     return { ...state, color: colors.yellow };        
-        default:
-            throw new Error(`Action type ${action.type} is not supported`);
-    }
-};
+
+
+  const handleIncrement = () => {
+    dispatch({ type: 'INCREMENT' });
+  }
+  const handleDecrement = () => {
+    dispatch({ type: 'DECREMENT' });
+  }
+  const handleReset = () => {
+    dispatch({ type: 'RESET' });
+  }
 
   return (
     <main className={styles.main}>
@@ -65,7 +76,7 @@ export default function Counter() {
       <div>
         <button
           type="button"
-          onClick={increment}
+          onClick={handleIncrement}
           aria-label="increment"
           style={{ backgroundColor: colors.green }}
         >
@@ -73,7 +84,7 @@ export default function Counter() {
         </button>
         <button
           type="button"
-          onClick={decrement}
+          onClick={handleDecrement}
           aria-label="decrement"
           style={{ backgroundColor: colors.red }}
         >
@@ -82,7 +93,7 @@ export default function Counter() {
         <button
           type="button"
           aria-label="reset"
-          onClick={reset}
+          onClick={handleReset}
           style={{ backgroundColor: colors.yellow }}
         >
           Reset
