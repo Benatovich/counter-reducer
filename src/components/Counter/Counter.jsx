@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './Counter.css';
+// import { state } from '../../context/CounterProvider'
 
 const colors = {
   yellow: 'rgb(236, 222, 153)',
@@ -8,22 +9,22 @@ const colors = {
 };
 
 export default function Counter() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   const [currentColor, setCurrentColor] = useState(colors.yellow);
 
   useEffect(() => {
-    if (count === 0) {
+    if (state.count === 0) {
       setCurrentColor(colors.yellow);
     }
 
-    if (count > 0) {
+    if (state.count > 0) {
       setCurrentColor(colors.green);
     }
 
-    if (count < 0) {
+    if (state.count < 0) {
       setCurrentColor(colors.red);
     }
-  }, [count]);
+  }, [state]);
 
   const increment = () => {
     setCount((prevState) => prevState + 1);

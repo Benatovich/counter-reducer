@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react'
+import { createContext, useContext, useReducer, useState } from 'react'
 
 const colors = {
     yellow: 'rgb(236, 222, 153)',
@@ -16,6 +16,8 @@ const reducer = (state, action) => {
             return { ...state, count: state.count - 1};
         case 'RESET':
             return initialState;
+        // case 'COLOR_ZERO':
+        //     return { ...state, color: colors.yellow };        
         default:
             throw new Error(`Action type ${action.type} is not supported`);
     }
@@ -25,6 +27,9 @@ const StateContext = createContext();
 
 export const CounterProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
+    // const [count, setCount] = useState(0);
+    // const [currentColor, setCurrentColor] = useState(colors.yellow);
+  
 
     const handleIncrement = () => {
         dispatch({ type: 'INCREMENT' });
@@ -35,6 +40,12 @@ export const CounterProvider = ({ children }) => {
     const handleReset = () => {
         dispatch({ type: 'RESET' });
     }
+
+    // const handleColor = () => {
+    //     state.count === 0 && dispatch({ type: 'COLOR_ZERO' });
+    //     state.count > 0 && dispatch({ type: 'COLOR_POSITIVE' });
+    //     state.count < 0 && dispatch({ type: 'COLOR_NEGATIVE' });
+    // };
     
     return (
         <StateContext.Provider
