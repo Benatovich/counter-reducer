@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useReducer } from 'react';
 import styles from './Counter.css';
 // import { state } from '../../context/CounterProvider'
 
@@ -8,35 +8,56 @@ const colors = {
   red: 'rgb(239, 68, 68)',
 };
 
+const initialState = { color: colors.yellow, count: 0 };
+
+
 export default function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [count, setCount] = useState(0);
   const [currentColor, setCurrentColor] = useState(colors.yellow);
 
-  // useEffect(() => {
-  //   if (state.count === 0) {
-  //     setCurrentColor(colors.yellow);
-  //   }
 
-  //   if (state.count > 0) {
-  //     setCurrentColor(colors.green);
-  //   }
+  
+  useEffect(() => {
+    if (state.count === 0) {
+      setCurrentColor(colors.yellow);
+    }
 
-  //   if (state.count < 0) {
-  //     setCurrentColor(colors.red);
-  //   }
-  // }, [state]);
+    if (state.count > 0) {
+      setCurrentColor(colors.green);
+    }
 
-  // const increment = () => {
-  //   setCount((prevState) => prevState + 1);
-  // };
+    if (state.count < 0) {
+      setCurrentColor(colors.red);
+    }
+  }, [state]);
 
-  // const decrement = () => {
-  //   setCount((prevState) => prevState - 1);
-  // };
+  const increment = () => {
+    setCount((prevState) => prevState + 1);
+  };
 
-  // const reset = () => {
-  //   setCount(0);
-  // };
+  const decrement = () => {
+    setCount((prevState) => prevState - 1);
+  };
+
+  const reset = () => {
+    setCount(0);
+  };
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+        case 'INCREMENT':
+            return { ...state, count: state.count + 1};
+        case 'DECREMENT':
+            return { ...state, count: state.count - 1};
+        case 'RESET':
+            return initialState;
+        // case 'COLOR_ZERO':
+        //     return { ...state, color: colors.yellow };        
+        default:
+            throw new Error(`Action type ${action.type} is not supported`);
+    }
+};
 
   return (
     <main className={styles.main}>
